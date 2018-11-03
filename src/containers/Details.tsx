@@ -130,9 +130,9 @@ class Details extends React.Component<IProps, IState> {
 													}>
 													<List>
 														{character.series.items.map(
-															(item, i) => (
+															(item, index) => (
 																<List.Item
-																	key={`series-item-${i}`}
+																	key={`series-item-${index}`}
 																	icon="circle outline"
 																	content={
 																		item.name

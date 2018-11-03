@@ -20,7 +20,12 @@ class Favourites extends React.Component<IProps> {
 		this.props.history.push({
 			pathname: '/details'
 		});
-    };
+	};
+	
+	public handleSearchChange = (e: React.FormEvent<EventTarget>): void => {
+		const target = e.target as HTMLInputElement;
+		this.props.onFilterFavourites(target.value);
+	};
 
 	public render() {
 		return (
@@ -37,7 +42,7 @@ class Favourites extends React.Component<IProps> {
 					<Search
 						className="SearchField"
 						placeholder="Filter by name or description"
-						onSearchChange={e => this.props.onFilterFavourites(e.target.value)}
+						onSearchChange={this.handleSearchChange.bind(this, event)}
 						showNoResults={false}
 					/>
 				</div>

@@ -9,19 +9,14 @@ export interface IHero {
     comics?: any[];
     stories?: any[];
     events?: any[];
-    series: ISeries[];
+    series: ISeries;
     favourite?: boolean;
-}
-
-interface Items {
-    name: string;
-    resourceURI: string;
 }
 
 interface ISeries {
     available: number;
     collectionURI: string;
-    items: Items[];
+    items: any[];
 }
 
 interface IUrl {
