@@ -8,14 +8,14 @@ import thunk from 'redux-thunk';
 
 import App from './App';
 import reducer from './store/reducers/reducer';
-import history from './utils/history';
 import registerServiceWorker from './registerServiceWorker';
+import createHistory from 'history/createBrowserHistory';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={createHistory()}>
       <App />
     </Router>
   </Provider>,

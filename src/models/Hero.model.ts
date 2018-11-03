@@ -1,6 +1,6 @@
 export interface IHero {
-    id?: number;
-    name?: string;
+    id: number;
+    name: string;
     description?: string;
     modified?: Date;
     resourceURI?: IUrl;
@@ -9,7 +9,19 @@ export interface IHero {
     comics?: any[];
     stories?: any[];
     events?: any[];
-    series?: any[];
+    series: ISeries[];
+    favourite?: boolean;
+}
+
+interface Items {
+    name: string;
+    resourceURI: string;
+}
+
+interface ISeries {
+    available: number;
+    collectionURI: string;
+    items: Items[];
 }
 
 interface IUrl {
@@ -18,6 +30,6 @@ interface IUrl {
 }
 
 interface Image {
-    path?: string;
-    extension?: string;
+    path: string;
+    extension: string;
 }

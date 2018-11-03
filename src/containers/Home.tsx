@@ -1,9 +1,127 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { History } from 'history';
 
-class Home extends React.Component<any, any> {
+import { IHero } from '../models/Hero.model';
+import * as actions from '../store/actions/actions';
+
+import { Button, Grid, Card, Image } from 'semantic-ui-react';
+import Loading from '../components/Loading/Loading';
+
+interface IProps {
+    heroes: IHero[];
+	loading: boolean;
+	history: History;
+	offset: number;
+    previewHero(character: IHero): void;
+    getHeroes(offset: number): Promise<IHero[]>;
+    onAddToFavourites(id: number): void;
+    onRemoveFromFavourites(id: number): void;
+}
+
+class Home extends React.Component<IProps, {}> {
+    public previewDetails = (character: IHero) => {
+		this.props.previewHero(character);
+		this.props.history.push({
+			pathname: '/details'
+		});
+    };
+    
+    public componentDidMount() {
+		window.addEventListener('scroll', this.handleScroll);
+		if (this.props.heroes.length > 0) {
+            return;
+        }
+		this.props.getHeroes(this.props.offset);
+	}
+
+	public handleScroll = () => {
+		if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+			if (this.props.loading) {
+                return;
+            }
+			this.props.getHeroes(this.props.offset);
+		}
+	};
+
+	public componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll);
+	}
+
     public render() {
-        return <h1>Hello from Home</h1>;
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+				<h2 style={{ margin: '50px 0' }}>Marvel Characters</h2>
+				<Grid columns={4}>
+					{this.props.heroes.map(character => (
+						<Grid.Column stretched={true} key={character.id}>
+							<Card raised={true} fluid={true}>
+								<Image
+									src={
+										character.thumbnail.path +
+										'.' +
+										character.thumbnail.extension
+									}
+								/>
+								<Card.Content>
+									<Card.Header>{character.name}</Card.Header>
+									<Card.Description>
+										{character.description}
+									</Card.Description>
+								</Card.Content>
+								<Card.Content extra={true}>
+									<Button
+										style={{ fontSize: '10px' }}
+										onClick={this.previewDetails.bind(this, character)}>
+										DETAILS
+									</Button>
+									{character.favourite ? (
+										<Button
+											color="red"
+											floated="right"
+											style={{ fontSize: '10px' }}
+											onClick={this.props.onRemoveFromFavourites.bind(this, character.id)}>
+											REMOVE FAVOURITE
+										</Button>
+									) : (
+										<Button
+											color="blue"
+											floated="right"
+											style={{ fontSize: '10px' }}
+											onClick={this.props.onAddToFavourites.bind(this, character.id)}>
+											ADD TO FAVOURITES
+										</Button>
+									)}
+								</Card.Content>
+							</Card>
+						</Grid.Column>
+					))}
+				</Grid>
+				{this.props.loading ? <Loading /> : null}
+			</div>
+        );
     }
 }
 
-export default Home;
+
+
+const mapStateToProps = (state: any) => {
+    return {
+        heroes: state.heroes,
+        offset: state.offset,
+        heroesCount: state.heroesCount,
+        loading: state.loading
+    }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+		onAddToFavourites: (id: number) => dispatch(actions.addToFavourites(id)),
+		onRemoveFromFavourites: (id: number) =>
+			dispatch(actions.removeFromFavourites(id)),
+		getHeroes: (offset: number) => dispatch(actions.getHeroes(offset)),
+		previewHero: (character: IHero) => dispatch(actions.getCurrentHero(character))
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
