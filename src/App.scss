@@ -11,7 +11,7 @@ $font-stack: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
     color: white;
 
     .App-logo {
-      animation: App-logo-spin infinite 20s linear;
+      animation: App-logo-spin infinite 5s linear;
       height: 80px;
     }
 
@@ -19,7 +19,7 @@ $font-stack: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
       font-size: 1.5em;
     }
   }
-  
+
   .App-intro {
     font-size: large;
   }
