@@ -1,5 +1,6 @@
 import { IHero } from '../../models/Hero.model';
 import * as actionTypes from '../actions/actionTypes';
+import { map, filter } from 'lodash';
 
 interface IState {
     heroes: IHero[];
@@ -37,33 +38,33 @@ const reducer = (state = initialState, action: any) => {
 			};
 
 		case actionTypes.ADD_TO_FAVOURITES: {
-			const newHeroes = state.heroes.map(
-				hero =>
-					hero.id === action.id ? { ...hero, favourite: true } : hero
+			const newHeroes = map(
+                state.heroes,
+				hero => hero.id === action.id ? { ...hero, favourite: true } : hero
 			);
 
 			return {
 				...state,
 				heroes: newHeroes,
-				favourites: newHeroes.filter(h => h.favourite)
+				favourites: filter(newHeroes, ['favourite', true])
 			};
 		}
 
 		case actionTypes.REMOVE_FROM_FAVOURITES: {
-			const newHeroes = state.heroes.map(
-				hero =>
-					hero.id === action.id ? { ...hero, favourite: false } : hero
+			const newHeroes = map(
+                state.heroes,
+				hero => hero.id === action.id ? { ...hero, favourite: false } : hero
 			);
 			return {
 				...state,
 				heroes: newHeroes,
-				favourites: newHeroes.filter(h => h.favourite)
+				favourites: filter(newHeroes, ['favourite', true])
 			};
 		}
 
 		case actionTypes.FILTER_FAVOURITES: {
-			const newFilteredFavourites = state.heroes
-				.filter(h => h.favourite)
+            const newFilteredFavourites = 
+                filter(state.heroes, ['favourite', true])
 				.filter(
 					favourite =>
 						favourite.name

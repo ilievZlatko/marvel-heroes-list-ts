@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { History } from 'history';
 import { Accordion, Card, Image, Icon, List, Grid } from 'semantic-ui-react';
 import * as actionTypes from '../store/actions/actionTypes';
-import { isEmpty } from '../utils/helperMethods';
+import { isEmpty, map } from 'lodash';
 import { IHero } from '../models/Hero.model';
 
 interface IState {
@@ -78,7 +78,7 @@ class Details extends React.Component<IProps, IState> {
 									<Accordion.Content
 										active={activeIndex === 0}>
 										<List>
-											{this.props.character.series.items.map(
+											{map(this.props.character.series.items,
 												(item: any, i: number) => (
 													<List.Item
 														key={`series-item-${i}`}
@@ -93,7 +93,7 @@ class Details extends React.Component<IProps, IState> {
 							</Card.Content>
 						</Card>
 						<Grid columns={4}>
-							{this.props.heroes.map((character, i) => (
+							{map(this.props.heroes, (character, i) => (
 								<Grid.Column stretched={true} key={character.id}>
 									<Card raised={true} fluid={true}>
 										<Image
@@ -129,7 +129,7 @@ class Details extends React.Component<IProps, IState> {
 														activeIndex === i + 1
 													}>
 													<List>
-														{character.series.items.map(
+														{map(character.series.items,
 															(item, index) => (
 																<List.Item
 																	key={`series-item-${index}`}

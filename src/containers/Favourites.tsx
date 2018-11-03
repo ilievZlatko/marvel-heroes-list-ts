@@ -5,6 +5,7 @@ import { Search, Button, Grid, Card, Image } from 'semantic-ui-react';
 import './Favourites.scss';
 import * as actions from '../store/actions/actions';
 import { IHero } from '../models/Hero.model';
+import { map } from 'lodash';
 
 interface IProps {
     history: History;
@@ -48,7 +49,7 @@ class Favourites extends React.Component<IProps> {
 				</div>
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<Grid columns={4}>
-						{this.props.favourites.map((character: IHero) => (
+						{map(this.props.favourites, (character: IHero) => (
 							<Grid.Column stretched={true} key={character.id}>
 								<Card raised={true} fluid={true}>
 									<Image
@@ -69,9 +70,7 @@ class Favourites extends React.Component<IProps> {
 									<Card.Content extra={true}>
 										<Button
 											style={{ fontSize: '10px' }}
-											onClick={() =>
-												this.previewDetails(character)
-											}>
+											onClick={() => this.previewDetails(character)}>
 											DETAILS
 										</Button>
 										<Button

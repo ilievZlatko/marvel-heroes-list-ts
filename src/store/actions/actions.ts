@@ -4,6 +4,7 @@ import * as CryptoJS from 'crypto-js';
 import { IHero } from '../../models/Hero.model';
 import urls from '../../urls';
 import * as marvelVariables from '../../utils/marvelVariables';
+import { assign } from 'lodash';
 
 const ts = new Date().getTime();
 
@@ -12,7 +13,7 @@ const hash = CryptoJS.MD5(
 ).toString();
 
 const mapNewHeroes = (heroes: IHero[]) => {
-	return heroes.map(h => Object.assign({}, h, { favorite: false }));
+	return heroes.map(h => assign({}, h, { favorite: false }));
 };
 
 const editOffset = (offset: number) => {

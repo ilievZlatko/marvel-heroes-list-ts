@@ -7,6 +7,7 @@ import * as actions from '../store/actions/actions';
 
 import { Button, Grid, Card, Image } from 'semantic-ui-react';
 import Loading from '../components/Loading/Loading';
+import { map } from 'lodash';
 
 interface IProps {
     heroes: IHero[];
@@ -55,7 +56,7 @@ class Home extends React.Component<IProps, {}> {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
 				<h2 style={{ margin: '50px 0' }}>Marvel Characters</h2>
 				<Grid columns={4}>
-					{this.props.heroes.map(character => (
+					{map(this.props.heroes, character => (
 						<Grid.Column stretched={true} key={character.id}>
 							<Card raised={true} fluid={true}>
 								<Image
