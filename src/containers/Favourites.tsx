@@ -42,7 +42,7 @@ class Favourites extends React.Component<IProps> {
 					<Search
 						className="SearchField"
 						placeholder="Filter by name or description"
-						onSearchChange={this.handleSearchChange.bind(this, event)}
+						onSearchChange={(event) => this.handleSearchChange(event)}
 						showNoResults={false}
 					/>
 				</div>

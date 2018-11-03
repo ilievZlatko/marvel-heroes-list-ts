@@ -48,6 +48,8 @@ class Home extends React.Component<IProps, {}> {
 		window.removeEventListener('scroll', this.handleScroll);
 	}
 
+	public createAddToFavouritesHandler = (id: number) => () => this.props.onAddToFavourites(id);
+
     public render() {
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -88,7 +90,7 @@ class Home extends React.Component<IProps, {}> {
 											color="blue"
 											floated="right"
 											style={{ fontSize: '10px' }}
-											onClick={this.props.onAddToFavourites.bind(this, character.id)}>
+											onClick={this.createAddToFavouritesHandler(character.id)}>
 											ADD TO FAVOURITES
 										</Button>
 									)}

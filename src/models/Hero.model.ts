@@ -1,7 +1,7 @@
 export interface IHero {
     id: number;
     name: string;
-    description?: string;
+    description: string;
     modified?: Date;
     resourceURI?: IUrl;
     urls?: string[];
