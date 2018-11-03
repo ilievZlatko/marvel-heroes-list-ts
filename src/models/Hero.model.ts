@@ -6,10 +6,10 @@ export interface IHero {
     resourceURI?: IUrl;
     urls?: string[];
     thumbnail: Image;
-    comics?: IComicList[];
-    stories?: IStoryList[];
-    events?: IEventList[];
-    series?: ISeriesList[];
+    comics?: any[];
+    stories?: any[];
+    events?: any[];
+    series?: any[];
 }
 
 interface IUrl {
@@ -20,53 +20,4 @@ interface IUrl {
 interface Image {
     path?: string;
     extension?: string;
-}
-
-interface IComicList {
-    available?: number;
-    returned?: number;
-    collectionURI?: string;
-    items: IComicSummary[]
-}
-
-interface IComicSummary {
-    resourceURI?: string;
-    name?: string;
-}
-
-interface IStoryList {
-    available?: number;
-    returned?: number;
-    collectionURI?: string;
-    items?: IStorySummary[];
-}
-
-interface IStorySummary {
-    resourceURI?: string;
-    name?: string;
-    type?: string;
-}
-
-interface IEventList {
-    available?: number;
-    returned?: number;
-    collectionURI?: string;
-    items?: IEventSummary[];
-}
-
-interface IEventSummary {
-    resourceURI?: string;
-    name?: string;
-}
-
-interface ISeriesList {
-    available?: number;
-    returned?: number;
-    collectionURI?: string;
-    items?: ISeriesSummary[];
-}
-
-interface ISeriesSummary {
-    resourceURI?: string;
-    name?: string;
 }

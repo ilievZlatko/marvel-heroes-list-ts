@@ -1,21 +1,19 @@
-import * as _ from 'lodash';
 import * as React from 'react';
-import './App.scss';
 
-import logo from './logo.svg';
+import Layout from './hoc/Layout';
+import Routes from './routes';
+import './index.scss';
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
+  public state = {
+    currentHero: {}
+  }
+
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+      <Layout>
+        <Routes currentHero={this.state.currentHero} />
+      </Layout>
     );
   }
 }
