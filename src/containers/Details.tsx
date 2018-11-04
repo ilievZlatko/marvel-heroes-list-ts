@@ -99,7 +99,11 @@ class Details extends React.Component<IProps, IState> {
 								</Accordion>
 							</Card.Content>
 						</Card>
-						<Grid columns={4}>
+						<Grid
+							columns={4}
+							doubling={true}
+							stackable={true}
+						>
 							{map(this.props.heroes, (character, i) => (
 								<Grid.Column stretched={true} key={character.id}>
 									<Card raised={true} fluid={true}>

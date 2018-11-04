@@ -61,9 +61,16 @@ class Home extends React.Component<IProps, {}> {
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
 				<h2 style={{ margin: '50px 0' }}>Marvel Characters</h2>
-				<Grid columns={4}>
+				<Grid
+					columns={4}
+					doubling={true}
+					stackable={true}
+				>
 					{map(this.props.heroes, character => (
-						<Grid.Column stretched={true} key={character.id}>
+						<Grid.Column
+							stretched={true}
+							key={character.id}
+						>
 							<Card raised={true} fluid={true}>
 								<Image
 									src={

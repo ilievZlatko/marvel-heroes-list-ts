@@ -37,12 +37,17 @@ class Favourites extends React.Component<IProps> {
 	public render() {
 		return (
 			<React.Fragment>
-				<div
+				<Grid
+					columns={2}
+					doubling={true}
+					stackable={true}
 					style={{
 						display: 'flex',
 						justifyContent: 'space-between',
-						alignItems: 'center'
-					}}>
+						alignItems: 'center',
+						marginBottom: '30px'
+					}}
+				>
 					<h2 style={{ margin: '50px 0' }}>
 						Your Favourite Marvel Characters
 					</h2>
@@ -52,9 +57,13 @@ class Favourites extends React.Component<IProps> {
 						onSearchChange={(event) => this.handleSearchChange(event)}
 						showNoResults={false}
 					/>
-				</div>
+				</Grid>
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
-					<Grid columns={4}>
+					<Grid
+						columns={4}
+						doubling={true}
+						stackable={true}
+					>
 						{map(this.props.favourites, (character: IHero) => (
 							<Grid.Column stretched={true} key={character.id}>
 								<Card raised={true} fluid={true}>
