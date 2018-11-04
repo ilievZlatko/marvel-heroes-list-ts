@@ -1,21 +1,13 @@
-import { IHero } from '../../models/Hero.model';
 import * as actionTypes from '../actions/actionTypes';
 import { map, filter } from 'lodash';
-
-interface IState {
-    heroes: IHero[];
-    favourites: IHero[];
-    character: object;
-    offset: number;
-    loading: boolean;
-}
+import IState from '../../models/StoreState.model';
 
 const initialState: IState = {
     character: {},
     favourites: [],
     heroes: [],
     loading: false,
-    offset: 0,
+    offset: 0
 }
 
 const reducer = (state = initialState, action: any) => {

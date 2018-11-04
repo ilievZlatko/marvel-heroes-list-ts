@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 import { History } from 'history';
 
-import { IHero } from '../models/Hero.model';
 import * as actions from '../store/actions/actions';
 
 import { Button, Grid, Card, Image } from 'semantic-ui-react';
 import Loading from '../components/Loading/Loading';
 import { map } from 'lodash';
+
+import { IHero } from '../models/Hero.model';
+import IStoreState from '../models/StoreState.model';
+import IExtraDispatchArguments from '../models/DispatchArguments.model';
+
 
 interface IProps {
     heroes: IHero[];
@@ -106,9 +112,7 @@ class Home extends React.Component<IProps, {}> {
     }
 }
 
-
-
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IStoreState) => {
     return {
         heroes: state.heroes,
         offset: state.offset,
@@ -117,7 +121,7 @@ const mapStateToProps = (state: any) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IStoreState, IExtraDispatchArguments, AnyAction>) => {
     return {
 		onAddToFavourites: (id: number) => dispatch(actions.addToFavourites(id)),
 		onRemoveFromFavourites: (id: number) =>

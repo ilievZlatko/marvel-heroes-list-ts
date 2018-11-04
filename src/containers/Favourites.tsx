@@ -1,11 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { History } from 'history';
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+
 import { Search, Button, Grid, Card, Image } from 'semantic-ui-react';
 import './Favourites.scss';
 import * as actions from '../store/actions/actions';
-import { IHero } from '../models/Hero.model';
 import { map } from 'lodash';
+
+import { IHero } from '../models/Hero.model';
+import IStoreState from '../models/StoreState.model';
+import IExtraDispatchArguments from '../models/DispatchArguments.model';
 
 interface IProps {
     history: History;
@@ -92,13 +98,13 @@ class Favourites extends React.Component<IProps> {
 	}
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IStoreState) => {
 	return {
 		favourites: state.favourites
 	};
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IStoreState, IExtraDispatchArguments, AnyAction>) => {
 	return {
 		onRemoveFromFavourites: (id: number) =>
 			dispatch(actions.removeFromFavourites(id)),

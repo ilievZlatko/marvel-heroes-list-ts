@@ -1,10 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { History } from 'history';
+import { AnyAction } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+
 import { Accordion, Card, Image, Icon, List, Grid } from 'semantic-ui-react';
 import * as actionTypes from '../store/actions/actionTypes';
 import { isEmpty, map } from 'lodash';
+
 import { IHero } from '../models/Hero.model';
+import IStoreState from '../models/StoreState.model';
+import IExtraDispatchArguments from '../models/DispatchArguments.model';
+
 
 interface IState {
     activeIndex: number;
@@ -155,14 +162,14 @@ class Details extends React.Component<IProps, IState> {
 	}
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IStoreState) => {
 	return {
 		heroes: state.heroes,
 		character: state.character
 	};
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<IStoreState, IExtraDispatchArguments, AnyAction>) => {
 	return {
 		onRemoveFromFavourites: (id: number) =>
 			dispatch({ type: actionTypes.REMOVE_FROM_FAVOURITES, id })
