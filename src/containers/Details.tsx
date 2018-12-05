@@ -23,6 +23,16 @@ interface IProps {
 	character: IHero;
 }
 
+/**
+ * The details component (page):
+ * Displays details for selected hero
+ * 
+ * Props:
+ * @prop {array} heroes - list of heroes fetched in redux store
+ * @prop {history} history - the react router history
+ * @prop {object} character - selected character to display 
+ */
+
 class Details extends React.Component<IProps, IState> {
 	public state = {
 		activeIndex: -1

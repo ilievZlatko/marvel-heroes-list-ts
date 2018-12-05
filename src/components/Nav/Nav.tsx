@@ -3,6 +3,12 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/images/MarvelLogo.png';
 import  './Nav.scss';
 
+/**
+ * The Nav Component:
+ * Simply holds the navigation links,
+ * recieves no props.
+ */
+
 const Nav: React.SFC = () => (
 	<React.Fragment>
 		<ul className="nav">

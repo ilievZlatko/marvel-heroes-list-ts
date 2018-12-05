@@ -26,6 +26,22 @@ interface IProps {
     onRemoveFromFavourites(id: number): void;
 }
 
+/**
+ * Home component is the main component,
+ * it holds the initially loaded cards with heroes
+ * and displays them nicely.
+ * 
+ * Props:
+ * @prop {array} heroes - list of heroes fetched from the API
+ * @prop {boolean} loading - true or false depending on the loading state
+ * @prop {History} history - the router history.
+ * @prop {number} offset - defines the next chunk of data the component has to load (used for the infinite scroll)
+ * @prop {function} previewHero - gets one @param {character} and redirects to hero details page
+ * @prop {function} getHeroes - gets one @param {offset} redux action that fetches 10 heroes depending on offset
+ * @prop {function} onAddToFavourites - gets one @param {id}, redux action that adds selected hero to favourites collection
+ * @prop {function} onRemoveFromFavourites - gets one @param {id}, redux action that removes selected hero from favourites collection
+ */
+
 class Home extends React.Component<IProps, {}> {
     public previewDetails = (character: IHero) => {
 		this.props.previewHero(character);

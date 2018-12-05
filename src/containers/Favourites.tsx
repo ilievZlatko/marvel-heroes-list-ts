@@ -21,6 +21,18 @@ interface IProps {
     onFilterFavourites(value: string): void;
 }
 
+/**
+ * The favourites component
+ * Displays all the favourite heroes
+ * 
+ * Props:
+ * @prop {history} history - react router history
+ * @prop {array} favourites - list of favourites heroes from redux store
+ * @prop {function} onRemoveFromFavourites - gets one @param {id} redux action that removes selected hero from favourites collection
+ * @prop {function} previewHero - gets one @param {character} the character that is passed as a prop to details page
+ * @prop {function} onFilterFavourites - gets one @param {value} search in the list of favourites by character name or description
+ */
+
 class Favourites extends React.Component<IProps> {
 	public previewDetails = (character: IHero) => {
 		this.props.previewHero(character);
